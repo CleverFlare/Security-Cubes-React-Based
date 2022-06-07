@@ -1,0 +1,21 @@
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkboxWrapper input[type="checkbox"] {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background-clip: content-box;
+  border: solid 1px white;
+  box-sizing: border-box;
+  padding: 5px;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.checkboxWrapper input[type="checkbox"]:checked {
+  background-color: white;
+}

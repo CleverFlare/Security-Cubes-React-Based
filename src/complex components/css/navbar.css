@@ -1,0 +1,192 @@
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background-color: black;
+  box-shadow: 0 -10px 20px 20px #090909;
+  z-index: 100;
+}
+
+.navbar-top .navbar-top__logo-wrapper {
+  display: flex;
+  width: 183.8px;
+}
+.navbar-top .navbar-top__logo-wrapper img {
+  width: 100%;
+}
+
+.navbar-top .navbar-top__nav-anchors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style-type: none;
+}
+.navbar-top .navbar-top__nav-anchors * {
+  color: white;
+  text-decoration: none;
+  transition: .3s;
+}
+.navbar-top .navbar-top__nav-anchors *:hover {
+  opacity: .7;
+}
+
+.navbar-top .navbar-top__account-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.navbar-top .navbar-top__account-icon-wrapper svg {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar-top .navbar-top__side-bar {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60vw;
+  height: 100vh;
+  padding: 20px;
+  margin: 0;
+  font-weight: bold;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  box-sizing: border-box;
+  transition: .5s;
+  z-index: 2000;
+  box-shadow: 10px 0 20px #0000004f;
+}
+.navbar-top .navbar-top__side-bar * {
+  color: black;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+.navbar-top .navbar-top__side-bar svg {
+  width: 32px;
+  height: 32px;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user  {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  padding: 10px 0;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user > :first-child  {
+  grid-row: 1 / -1;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user > :last-child  {
+  grid-column: 2 / -1;
+  color: gray;
+  font-size: 12px;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logo-wrapper {
+  display: flex;
+  max-width: 183.8px;
+  padding: 10px 0;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logo-wrapper img {
+  width: 100%;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__anchors-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  list-style-type: none;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__anchors-wrapper li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__anchors-wrapper li a {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 20px 0;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__layout-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__account {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 20px 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-top .navbar-top__burger-button {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  position: relative;
+}
+.navbar-top .navbar-top__burger-button::after {
+  content: "";
+  background-color: #0000001a;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500vw;
+  height: 500vw;
+  transform: translate(-50%, -50%);
+  transition: .5s;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.navbar-top .navbar-top__burger-button.spread-layer::after {
+  opacity: 1;
+  pointer-events: all;
+  transform: translate(-50%, -50%);
+  transition: .5s;
+}
+.navbar-top .navbar-top__burger-button svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+  z-index: 5;
+}
+
+@media screen and (max-width: 874px) {
+  .navbar-top {
+    padding: 5px 10px;
+  }
+  .navbar-top .navbar-top__burger-button {
+    display: flex;
+  }
+  .navbar-top .navbar-top__nav-anchors {
+    display: none;
+  }
+  .navbar-top .navbar-top__account-icon-wrapper {
+    display: none;
+  }
+}

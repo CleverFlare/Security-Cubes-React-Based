@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.formControlWrapper {
+  display: flex;
+  position: relative;
+}
+.formControl {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #3D3D3D;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+}
+.showAndHideButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  width: 40px;
+  height: 40px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: .2s;
+}
+.showAndHideButton:hover {
+  background-color: rgba(255, 255, 255, 0.366);
+}
+.showAndHideButton svg {
+  width: 20px;
+  height: 20px;
+}

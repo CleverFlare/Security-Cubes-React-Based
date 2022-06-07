@@ -1,0 +1,18 @@
+#hall > :first-child {
+  justify-content: space-evenly;
+}
+
+.hall__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.hall__card__picture-wrapper {
+  width: 200px;
+}
+.hall__card__picture-wrapper img {
+  width: 200px;
+}

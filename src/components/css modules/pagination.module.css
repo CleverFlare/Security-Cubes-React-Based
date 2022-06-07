@@ -1,0 +1,28 @@
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #474747;
+  padding: 10px;
+  width: max-content;
+  border-radius: 100px;
+}
+
+.paginationWrapper button {
+  aspect-ratio: 1 / 1;
+  width: 40px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.paginationWrapper .active {
+  color: black;
+  background-color: white;
+  transform: scale(1.1);
+}

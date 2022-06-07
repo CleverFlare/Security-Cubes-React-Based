@@ -1,0 +1,75 @@
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 194px;
+  width: max-content;
+  height: 56px;
+  border-radius: 3px;
+  background-color: #0000b5;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.primary:hover {
+  background-color: #9999ff;
+  color: #0000b5;
+}
+
+.disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 194px;
+  width: max-content;
+  height: 56px;
+  border-radius: 3px;
+  background-color: #424242;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  text-decoration: none;
+}
+
+.secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 194px;
+  width: max-content;
+  height: 56px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: #0000b5 solid 2px;
+  color: #0000b5;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.secondary:hover {
+  border: #9999ff solid 2px;
+  color: #9999ff;
+}
+
+.tertiary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 178px;
+  width: max-content;
+  height: 40px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: #fff solid 2px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.tertiary:hover {
+  background-color: #fff;
+  border: #fff solid 2px;
+  color: #9e2a2b;
+}

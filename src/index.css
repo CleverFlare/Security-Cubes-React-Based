@@ -1,3 +1,7 @@
+:root {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,120 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #090909;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* ---global layout styling classes---- */
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 50px;
+  min-height: 100vh;
+  padding: 100px 100px;
+  box-sizing: border-box;
+}
+.flex__wrapper-columns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.flex__wrapper-rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.flex-rows-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-columns-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  min-height: 100vh;
+  padding: 100px 100px;
+  box-sizing: border-box;
+}
+.flex-center__wrapper-columns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.flex-center__wrapper-rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cards-grid-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  min-height: 192.88px;
+}
+
+.cards-grid-2 {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: 143.993px 143.993px 143.993px 143.993px;
+  gap: 20px;
+  width: 100%;
+}
+
+@media screen and (max-width: 874px) {
+  .flex-center {
+    align-items: center;
+    padding: 0 10px;
+  }
+  .flex-center * {
+    text-align: center;
+  }
+  .flex * {
+    text-align: center;
+  }
+
+  .flex-center__wrapper-rows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+  }
+  .flex__wrapper-rows {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .cards-grid-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    min-height: 192.88px;
+  }
 }
