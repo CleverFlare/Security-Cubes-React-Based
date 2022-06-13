@@ -1,11 +1,11 @@
 import "./css/home.css";
-import Typography from "../components/Typography";
-import Button from "../components/Button";
-import FormControl from "../components/FormControl";
+import Typography from "../uikit/simple/Typography";
+import Button from "../uikit/simple/Button";
+import FormControl from "../uikit/simple/FormControl";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import Plan from "../complex components/Plan";
+import Plan from "../uikit/complex/Plan";
 import TwitterSvg from "../icons/TwitterSvg";
 import FacebookSvg from "../icons/FacebookSvg";
 import { Link } from "react-router-dom";
@@ -19,7 +19,11 @@ const Home = () => {
   };
   return (
     <div className="home-page">
-      <div data-aos="fade-right" className="flex-center" id="home">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="home"
+      >
         <Typography
           varient="caption"
           element="p"
@@ -27,14 +31,18 @@ const Home = () => {
         >
           cyber security made fun!
         </Typography>
-        <Typography varient="pageHeader" element="p">
+        <Typography varient="page-header" element="p">
           Compete in a MMORPG game with other hackers.
         </Typography>
         <Button to="/hall">Hacker Portal</Button>
       </div>
-      <div data-aos="fade-right" className="flex-center" id="about">
-        <div className="flex-center__wrapper-columns">
-          <Typography varient="sectionHeader" element="p">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="about"
+      >
+        <div className="columns justify-center gap-10">
+          <Typography varient="section-header" element="p">
             About
           </Typography>
           <Typography varient="labels" element="p">
@@ -42,8 +50,8 @@ const Home = () => {
             you can access it through our hacker portal.
           </Typography>
         </div>
-        <div className="flex-center__wrapper-columns">
-          <Typography varient="sectionHeader" element="p">
+        <div className="columns justify-center gap-10">
+          <Typography varient="section-header" element="p">
             Mission
           </Typography>
           <Typography varient="labels" element="p">
@@ -52,8 +60,8 @@ const Home = () => {
             on interactive learning.
           </Typography>
         </div>
-        <div className="flex-center__wrapper-columns">
-          <Typography varient="sectionHeader" element="p">
+        <div className="columns justify-center gap-10">
+          <Typography varient="section-header" element="p">
             Vision
           </Typography>
           <Typography varient="labels" element="p">
@@ -62,7 +70,11 @@ const Home = () => {
           </Typography>
         </div>
       </div>
-      <div data-aos="fade-right" className="flex-center" id="ctf">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="ctf"
+      >
         <Typography
           varient="caption"
           element="p"
@@ -70,39 +82,47 @@ const Home = () => {
         >
           ctf online gym
         </Typography>
-        <Typography varient="pageHeader" element="p">
+        <Typography varient="page-header" element="p">
           Compete With other players and capture the flags.
         </Typography>
-        <Typography varient="sectionContent" element="p">
+        <Typography varient="section-content" element="p">
           participants must reverse engineer, break, hack, decrypt, and think
           creatively and critically to solve the challenges and capture the
           flags.
         </Typography>
         <Button>Compete Now</Button>
       </div>
-      <div data-aos="fade-right" className="flex-center" id="contact">
-        <Typography varient="sectionHeader" element="p">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="contact"
+      >
+        <Typography varient="section-header" element="p">
           Contact Us
         </Typography>
-        <Typography varient="sectionContent" element="p">
+        <Typography varient="section-content" element="p">
           Get in touch with us today!
         </Typography>
-        <form className="contact-form-layout" onSubmit={handleContactSubmit}>
+        <form className="contact-layout" onSubmit={handleContactSubmit}>
           <FormControl type="text" label="Name" />
           <FormControl type="email" label="Email" />
           <FormControl type="textarea" label="Your Message" />
           <Button varient="primary">Send</Button>
         </form>
       </div>
-      <div data-aos="fade-right" className="flex-center" id="pricing">
-        <Typography varient="sectionHeader" element="p">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="pricing"
+      >
+        <Typography varient="section-header" element="p">
           Pricing
         </Typography>
-        <Typography varient="sectionContent" element="p">
+        <Typography varient="section-content" element="p">
           Here you can compete with other hackers in an online MMORPG game, you
           can access it through our hacker portal.
         </Typography>
-        <div className="plans-grid">
+        <div className="plans-layout">
           <Plan
             name="plan 1"
             features={["feature 1", "feature 2", "feature 3"]}
@@ -123,16 +143,20 @@ const Home = () => {
           />
         </div>
       </div>
-      <div data-aos="fade-right" className="flex-center" id="blog">
-        <Typography varient="pageHeader" element="p">
+      <div
+        data-aos="fade-right"
+        className="sector columns justify-center gap-50"
+        id="blog"
+      >
+        <Typography varient="page-header" element="p">
           Blog
         </Typography>
-        <Typography varient="sectionContent" element="p">
+        <Typography varient="section-content" element="p">
           Find a new source of knowledge for yourself!
         </Typography>
         <Button varient="disabled">Coming soon</Button>
       </div>
-      <div data-aos="fade-right" className="follow-us">
+      <div data-aos="fade-right" className="official-accounts">
         <p>Follow Us</p>
         <Link to="/">
           <TwitterSvg />

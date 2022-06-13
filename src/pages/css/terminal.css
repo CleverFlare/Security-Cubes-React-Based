@@ -1,0 +1,192 @@
+#terminal {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+#terminal > :first-child,
+#terminal > :last-child {
+  flex: 1;
+}
+
+.guide {
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  background-color: #3d3d3d;
+}
+.guide-header span {
+  padding: 10px 20px;
+}
+
+.guide-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  max-height: 800px;
+  padding: 20px;
+  color: initial;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.guide-body * {
+  text-align: start;
+}
+
+.bash {
+  display: flex;
+  flex-direction: column;
+}
+
+.bash-header {
+  display: flex;
+  gap: 3px;
+}
+
+.bash-tabs {
+  display: flex;
+  gap: 3px;
+}
+
+.bash-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  max-height: 800px;
+  padding: 20px;
+  background-color: #3d3d3d;
+  overflow-y: auto;
+}
+
+.bash-body * {
+  cursor: default;
+}
+
+.bash-body *::selection {
+  color: black;
+  background-color: white;
+}
+
+.tab {
+  appearance: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: inherit;
+  background-color: #242424;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #3d3d3d;
+}
+
+.tab-close {
+  appearance: none;
+  aspect-ratio: 1 / 1;
+  width: 20px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tab-close:hover {
+  background-color: rgba(0, 0, 0, 0.361);
+  outline: 5px solid rgba(0, 0, 0, 0.361);
+}
+
+.add-tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 50px;
+  font-size: 1.3rem;
+  color: white;
+  background-color: #3d3d3d;
+  cursor: pointer;
+}
+
+.terminal-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terminal-output {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terminal-input {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  color: #d29b34;
+}
+
+.terminal-input input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: monospace;
+  color: #f0bf81;
+}
+
+.output-response {
+  color: #a2ffa2;
+  font-family: monospace;
+}
+.output-response::before {
+  content: "> ";
+  color: #a2ffa2;
+  font-family: monospace;
+}
+
+.output-command {
+  font-size: 1rem;
+  font-family: monospace;
+}
+.output-command::before {
+  content: "$ ";
+  font-family: monospace;
+}
+
+@media screen and (max-width: 874px) {
+  #terminal {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+
+  .bash,
+  .guide {
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .terminal-output {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .terminal-input input {
+    text-align: start;
+  }
+}

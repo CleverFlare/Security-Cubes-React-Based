@@ -2,10 +2,15 @@
   scroll-behavior: smooth;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,12 +19,61 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 /* ---global layout styling classes---- */
 
+.sector {
+  min-height: 100vh;
+  padding: 100px 100px;
+  box-sizing: border-box;
+}
+
+.rows {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-20 {
+  gap: 10px;
+}
+
+.gap-30 {
+  gap: 10px;
+}
+
+.gap-40 {
+  gap: 10px;
+}
+
+.gap-50 {
+  gap: 50px;
+}
+/* sector columns gap-50 */
 .flex {
   display: flex;
   flex-direction: column;
@@ -29,21 +83,23 @@ code {
   padding: 100px 100px;
   box-sizing: border-box;
 }
+/*  */
 .flex__wrapper-columns {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
 }
+/* rows gap-10 */
 .flex__wrapper-rows {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   gap: 10px;
 }
-
 .flex-rows-between {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .flex-columns-between {
@@ -51,7 +107,7 @@ code {
   flex-direction: column;
   justify-content: space-between;
 }
-
+/* sector columns justify-center gap-50 */
 .flex-center {
   display: flex;
   flex-direction: column;
@@ -61,12 +117,14 @@ code {
   padding: 100px 100px;
   box-sizing: border-box;
 }
+/* columns justify-center gap-10 */
 .flex-center__wrapper-columns {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
 }
+/* rows justify-center gap-10 */
 .flex-center__wrapper-rows {
   display: flex;
   flex-direction: row;
@@ -93,6 +151,10 @@ code {
 }
 
 @media screen and (max-width: 874px) {
+  .sector {
+    text-align: center;
+    padding-inline: 5px;
+  }
   .flex-center {
     align-items: center;
     padding: 0 10px;

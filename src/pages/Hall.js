@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import Button from "../uikit/simple/Button";
 import "./css/hall.css";
 import AOS from "aos";
 import { useEffect } from "react";
@@ -8,8 +8,8 @@ const Hall = () => {
     AOS.init({ duration: 1000, delay: 200, once: true });
   }, []);
   return (
-    <div className="flex-center" id="hall">
-      <div className="flex-center__wrapper-rows">
+    <div className="sector columns justify-center gap-50" id="hall">
+      <div className="rows justify-center gap-10">
         <div data-aos="flip-left" className="hall__card" id="cyber-games-card">
           <div className="hall__card__picture-wrapper">
             <img src="./illustrations/Games.png" />

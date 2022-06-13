@@ -1,4 +1,4 @@
-import Typographies from "./css modules/typography.module.css";
+import TypographyStyles from "./css modules/typography.module.css";
 
 const properTagNames = ["p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "pre"];
 
@@ -11,10 +11,10 @@ const Typography = ({ varient, element, style, children }) => {
     <TagName
       className={
         varient
-          ? Object.keys(Typographies).includes(varient)
-            ? Typographies[varient]
-            : Typographies.pagesHeader
-          : Typographies.pagesHeader
+          ? Object.keys(TypographyStyles).includes(varient)
+            ? TypographyStyles[varient]
+            : TypographyStyles["pages-header"]
+          : TypographyStyles["pages-header"]
       }
       style={style}
     >

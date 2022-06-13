@@ -5,10 +5,10 @@ const Card = ({ picture, src, title, name, lessons, style }) => {
   return (
     <Link
       to={src ? src : ""}
-      className={CardStyles.card}
+      className={CardStyles["card"]}
       style={style && style}
     >
-      <div className={CardStyles.cardWrapper}>
+      <div className={CardStyles["card-wrapper"]}>
         <h2>{title}</h2>
         {lessons && <p>lessons {lessons}</p>}
         <img src={picture} alt="course's picture" />

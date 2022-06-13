@@ -1,4 +1,4 @@
-.paginationWrapper {
+.pagination-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   border-radius: 100px;
 }
 
-.paginationWrapper button {
+.pagination-wrapper button {
   aspect-ratio: 1 / 1;
   width: 40px;
   border-radius: 50%;
@@ -18,10 +18,10 @@
   background-color: black;
   border: none;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.paginationWrapper .active {
+.pagination-wrapper .active {
   color: black;
   background-color: white;
   transform: scale(1.1);

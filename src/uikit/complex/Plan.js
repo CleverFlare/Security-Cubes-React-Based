@@ -1,5 +1,5 @@
-import Button from "../components/Button";
-import Typography from "../components/Typography";
+import Button from "../simple/Button";
+import Typography from "../simple/Typography";
 import PlanStyles from "./css/css modules/plan.module.css";
 
 const Plan = ({ name, features, price, duration }) => {
@@ -9,7 +9,7 @@ const Plan = ({ name, features, price, duration }) => {
         {name}
       </Typography>
       <div className={PlanStyles.wrapper}>
-        <Typography varient="pageHeader" element="h2">
+        <Typography varient="page-header" element="h2">
           ${price}
         </Typography>
         <Typography varient="labels" element="p">
@@ -20,7 +20,7 @@ const Plan = ({ name, features, price, duration }) => {
       <menu className={PlanStyles.featuresMenu}>
         {features.map((feature, index) => (
           <li key={index}>
-            <Typography varient="sectionContent" element="p">
+            <Typography varient="section-content" element="p">
               {feature}
             </Typography>
           </li>

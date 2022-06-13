@@ -1,6 +1,6 @@
-import Pagination from "../components/Pagination";
+import Pagination from "../uikit/simple/Pagination";
 import { useState } from "react";
-import Card from "../components/Card";
+import Card from "../uikit/simple/Card";
 
 const testingArr = [
   "hello",

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useReducer, useEffect } from "react";
-import Button from "../components/Button";
-import CheckBox from "../components/CheckBox";
-import FormControl from "../components/FormControl";
-import Typography from "../components/Typography";
+import Button from "../uikit/simple/Button";
+import CheckBox from "../uikit/simple/CheckBox";
+import FormControl from "../uikit/simple/FormControl";
+import Typography from "../uikit/simple/Typography";
 import "./css/registration.css";
 import BackArrowSvg from "../icons/BackArrowSvg";
-import Toggle from "../components/Toggle";
+import Toggle from "../uikit/simple/Toggle";
 import AOS from "aos";
 
 const init = {
@@ -79,15 +79,15 @@ const Registration = () => {
 
   return (
     <div id="registration" data-aos="fade-in">
-      <div className="flex-center">
+      <div className="sector columns justify-center gap-50">
         <div className="toggle-wrapper">
           <p>Sign In</p>
           <Toggle onToggle={handleToggleRegisterState} />
           <p>Sign Up</p>
         </div>
         <div
-          className="flex__wrapper-rows"
-          style={{ width: "100%", position: "relative" }}
+          className="rows gap-10"
+          style={{ width: "100%", position: "relative", flexWrap: "nowrap" }}
         >
           <div className="backarrow-wrapper">
             <Link to={-1}>
@@ -106,8 +106,8 @@ const Registration = () => {
               }}
               data-aos="fade-right"
             >
-              <Typography varient="pageHeader">Sign in</Typography>
-              <Typography varient="sectionContent">
+              <Typography varient="page-header">Sign in</Typography>
+              <Typography varient="section-content">
                 Sign in to your account
               </Typography>
               <FormControl
@@ -163,8 +163,8 @@ const Registration = () => {
               }}
               data-aos="fade-left"
             >
-              <Typography varient="pageHeader">Create account</Typography>
-              <Typography varient="sectionContent">
+              <Typography varient="page-header">Create account</Typography>
+              <Typography varient="section-content">
                 Create an account and join the game!
               </Typography>
               <FormControl

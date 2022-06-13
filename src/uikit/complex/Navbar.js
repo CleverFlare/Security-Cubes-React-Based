@@ -1,16 +1,16 @@
 import "./css/navbar.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import AccountSvg from "../icons/AccountSvg";
-import BurgerSvg from "../icons/BurgerSvg";
-import ContactSvg from "../icons/ContactSvg";
-import EditSvg from "../icons/EditSvg";
-import HomeSvg from "../icons/HomeSvg";
-import LabelSvg from "../icons/LabelSvg";
-import TrophySvg from "../icons/TrophySvg";
-import UsSvg from "../icons/UsSvg";
-import CloseSvg from "../icons/CloseSvg";
-import SignoutSvg from "../icons/SingoutSvg";
+import AccountSvg from "../../icons/AccountSvg";
+import BurgerSvg from "../../icons/BurgerSvg";
+import ContactSvg from "../../icons/ContactSvg";
+import EditSvg from "../../icons/EditSvg";
+import HomeSvg from "../../icons/HomeSvg";
+import LabelSvg from "../../icons/LabelSvg";
+import TrophySvg from "../../icons/TrophySvg";
+import UsSvg from "../../icons/UsSvg";
+import CloseSvg from "../../icons/CloseSvg";
+import SignoutSvg from "../../icons/SingoutSvg";
 import { HashLink } from "react-router-hash-link";
 import AOS from "aos";
 

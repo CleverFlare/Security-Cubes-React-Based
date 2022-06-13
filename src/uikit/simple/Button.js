@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Buttons from "./css modules/button.module.css";
+import ButtonStyles from "./css modules/button.module.css";
 
 const Button = ({ varient, children, onClick, to }) => {
   return (
@@ -8,10 +8,10 @@ const Button = ({ varient, children, onClick, to }) => {
         <button
           className={
             varient
-              ? Object.keys(Buttons).includes(varient)
-                ? Buttons[varient]
-                : Buttons.primary
-              : Buttons.primary
+              ? Object.keys(ButtonStyles).includes(varient)
+                ? ButtonStyles[varient]
+                : ButtonStyles["primary"]
+              : ButtonStyles["primary"]
           }
           onClick={onClick}
         >
@@ -23,10 +23,10 @@ const Button = ({ varient, children, onClick, to }) => {
           to={to}
           className={
             varient
-              ? Object.keys(Buttons).includes(varient)
-                ? Buttons[varient]
-                : Buttons.primary
-              : Buttons.primary
+              ? Object.keys(ButtonStyles).includes(varient)
+                ? ButtonStyles[varient]
+                : ButtonStyles["primary"]
+              : ButtonStyles["primary"]
           }
           onClick={onClick}
         >

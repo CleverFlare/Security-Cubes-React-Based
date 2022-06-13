@@ -1,0 +1,72 @@
+.code {
+  direction: ltr;
+  width: 70%;
+  padding: 10px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+}
+
+.code-list-item {
+  direction: ltr;
+  width: 70%;
+  padding: 10px;
+  margin: 0 20px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  position: relative;
+}
+.guide-body[dir="ltr"] .code-list-item::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+}
+
+.list-item {
+  margin: 0 20px;
+  position: relative;
+}
+.guide-body[dir="ltr"] .list-item::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+}
+
+.guide-body[dir="rtl"] .list-item::before {
+  content: "";
+  aspect-ratio: 1 / 1;
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+}
+
+.guide-body[dir="rtl"] .code-list-item::before {
+  content: "";
+  aspect-ratio: 1 / 1;
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+}

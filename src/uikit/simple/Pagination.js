@@ -31,13 +31,15 @@ const Pagination = ({ startPointSetter, endPointSetter, array, amount }) => {
     setActive((lastValue) => lastValue - 1);
   };
   return (
-    <div className={PaginationStyles.paginationWrapper}>
+    <div className={PaginationStyles["pagination-wrapper"]}>
       <button onClick={handleMoveBackward}>◄◄</button>
       {buttons &&
         buttons.map((buttonNumber, index) => (
           <button
             key={index}
-            className={active === buttonNumber ? PaginationStyles.active : ""}
+            className={
+              active === buttonNumber ? PaginationStyles["active"] : ""
+            }
             onClick={() => handlePaginating(buttonNumber)}
           >
             {buttonNumber + 1}

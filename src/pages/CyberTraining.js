@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Card from "../components/Card";
-import Pagination from "../components/Pagination";
-import Typography from "../components/Typography";
+import Card from "../uikit/simple/Card";
+import Pagination from "../uikit/simple/Pagination";
+import Typography from "../uikit/simple/Typography";
 
 const testingArray = [
   {
@@ -99,9 +99,9 @@ const CyberTraining = () => {
 
   return (
     <div className="cyber-training">
-      <div className="flex">
-        <div className="flex__wrapper-columns" style={{ gap: "20px" }}>
-          <Typography varient="sectionContent">Recommended paths</Typography>
+      <div className="sector columns gap-50">
+        <div className="columns gap-10" style={{ gap: "20px" }}>
+          <Typography varient="section-content">Recommended paths</Typography>
           <div className="cards-grid-1">
             {testingArray
               .slice(recommendedStartPoint, recommendedEndPoint)
@@ -117,7 +117,7 @@ const CyberTraining = () => {
               ))}
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="rows justify-center">
           <Pagination
             startPointSetter={setRecommendedStartPoint}
             endPointSetter={setRecommendedEndPoint}
@@ -126,8 +126,8 @@ const CyberTraining = () => {
           />
         </div>
 
-        <div className="flex__wrapper-columns" style={{ gap: "20px" }}>
-          <Typography varient="sectionContent">Popular Courses</Typography>
+        <div className="columns gap-10" style={{ gap: "20px" }}>
+          <Typography varient="section-content">Popular Courses</Typography>
           <div className="cards-grid-1">
             {testingArray
               .slice(popularStartPoint, popularEndPoint)
@@ -143,7 +143,7 @@ const CyberTraining = () => {
               ))}
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="rows justify-center">
           <Pagination
             startPointSetter={setPopularStartPoint}
             endPointSetter={setPopularEndPoint}

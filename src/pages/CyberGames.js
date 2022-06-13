@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Card from "../components/Card";
-import Pagination from "../components/Pagination";
-import Typography from "../components/Typography";
+import Card from "../uikit/simple/Card";
+import Pagination from "../uikit/simple/Pagination";
+import Typography from "../uikit/simple/Typography";
 
 const testingArray = [
   {
@@ -254,7 +254,7 @@ const CyberGames = () => {
   return (
     <div className="flex" id="cyber-games">
       <div className="flex-center__wrapper-columns" style={{ gap: "20px" }}>
-        <Typography varient="sectionContent">Games</Typography>
+        <Typography varient="section-content">Games</Typography>
         <div className="cards-grid-2">
           {testingArray.slice(startPoint, endPoint).map((item, index) => (
             <Card

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Card from "../components/Card";
-import Pagination from "../components/Pagination";
-import Typography from "../components/Typography";
+import Card from "../uikit/simple/Card";
+import Pagination from "../uikit/simple/Pagination";
+import Typography from "../uikit/simple/Typography";
 
 const testingArray = [
   {
@@ -98,17 +98,18 @@ const Courses = () => {
   const [endPoint, setEndPoint] = useState(null);
 
   return (
-    <div className="flex" style={{ gap: "20px" }}>
+    <div className="sector columns gap-50" style={{ gap: "20px" }}>
       <Link to="/training" style={{ color: "white", textDecoration: "none" }}>
         &lt; All Paths
       </Link>
-      <Typography varient="sectionContent">Web Security Knowledge</Typography>
+      <Typography varient="section-content">Web Security Knowledge</Typography>
       <Typography varient="caption">Web Security Knowledge</Typography>
-      <Typography varient="buttonLabels">Courses</Typography>
+      <Typography varient="button-labels">Courses</Typography>
       <hr style={{ width: "100%" }} />
       <div className="cards-grid-1">
-        {testingArray.slice(startPoint, endPoint).map((card) => (
+        {testingArray.slice(startPoint, endPoint).map((card, index) => (
           <Card
+            key={index}
             title={card.title}
             name={card.name}
             picture={card.picture}
@@ -117,7 +118,7 @@ const Courses = () => {
           />
         ))}
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="rows justify-center">
         <Pagination
           startPointSetter={setStartPoint}
           endPointSetter={setEndPoint}
