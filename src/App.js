@@ -20,13 +20,25 @@ function App({ token }) {
   const [gamesData, setGamesData] = useState(null);
 
   useEffect(() => {
-    fetch("https://securitycubes.com/api/plans/")
-      .then((res) => {
-        return res.json();
+    if (token) {
+      fetch("https://securitycubes.com/api/plans/", {
+        headers: { Authorization: "Token" + " " + token },
       })
-      .then((data) => {
-        setPlansData(data.plans);
-      });
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setPlansData(data.plans);
+        });
+    } else {
+      fetch("https://securitycubes.com/api/plans/")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setPlansData(data.plans);
+        });
+    }
 
     if (!token) return;
 
