@@ -4,11 +4,13 @@ import FacebookSvg from "../icons/FacebookSvg";
 import PlaySvg from "../icons/PlaySvg";
 import TwitterSvg from "../icons/TwitterSvg";
 import "./css/lessons.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Lesson = ({ name, src, watched }) => {
+const Lesson = ({ name, id, watched }) => {
   return (
-    <Link to={src} className="lesson">
+    <Link to={"/terminal/" + id} className="lesson">
       <div className="lesson-button-wrapper">
         <PlaySvg />
         <p style={{ fontWeight: "bold" }}>{name}</p>
@@ -18,26 +20,53 @@ const Lesson = ({ name, src, watched }) => {
   );
 };
 
-const Lessons = () => {
+const Lessons = ({ token }) => {
   const [currentHoveredStar, setCurrentHoveredStar] = useState(0);
   const stars = Array(5).fill(0);
+  const [lessonsData, setLessonsData] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const { lesson } = useParams();
+
+  useEffect(() => {
+    fetch(
+      "https://securitycubes.com/api/challangeDetail/?Challangeid=" + lesson,
+      { headers: { Authorization: "Token " + token } }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setLessonsData(data);
+        setProgress(
+          (data[0].examples.filter((example) => example.IsSolved).length /
+            data[0].examples.length) *
+            100
+        );
+      });
+  }, []);
+
   return (
     <div id="lessons">
       <div className="course-header">
-        <Typography varient="section-content">
-          Introduction to information security
+        <Typography varient="section-content" style={{ fontWeight: "bold" }}>
+          {lessonsData && lessonsData[0].BigTitle}
+          {!lessonsData && "Loading..."}
         </Typography>
         <Typography varient="labels" style={{ fontSize: "13px" }}>
-          this course is a part of Cloud security knowledge path
+          {lessonsData && lessonsData[0].Hint}
+          {!lessonsData && "Loading..."}
         </Typography>
-        <div className="rows space-between align-center">
-          <Link to="" className="start-button" style={{ marginRight: "auto" }}>
+        <div className="rows space-between align-center gap-30" id="wrapper">
+          <Link to="" className="start-button">
             <PlaySvg /> Start Course
           </Link>
-          <div className="progress-wrapper" style={{ marginLeft: "auto" }}>
+          <div className="progress-wrapper">
             <p>progress</p>
-            <div className="progress"></div>
-            <p>0%</p>
+            <div
+              className="progress"
+              style={{ "--progress": progress + "%" }}
+            ></div>
+            <p>{progress}%</p>
           </div>
         </div>
       </div>
@@ -46,25 +75,47 @@ const Lessons = () => {
           <p>Table of content</p>
         </div>
         <div className="lessions-table">
-          <Lesson name="Arabic" src="/terminal" watched={true} />
-          <Lesson name="Arabic" src="/terminal" watched={true} />
+          {lessonsData &&
+            lessonsData[0].examples.map((item, index) => (
+              <Lesson
+                key={index}
+                id={item.id}
+                name={item.title}
+                watched={item.IsSolved}
+              />
+            ))}
+          {!lessonsData && (
+            <p
+              style={{
+                color: "black",
+                margin: "10px 30px",
+                fontWeight: "bold",
+              }}
+            >
+              Loading...
+            </p>
+          )}
         </div>
       </div>
       <div className="course-details">
         <div className="description">
           <h4>Description</h4>
           <p>
-            An information-gathering mission in cybersecurity is the act of
-            collecting information about a potential target. This could be done
-            for penetration testing, network security monitoring or other
-            cybersecurity tasks.
+            {lessonsData && lessonsData[0].ChallangeDescription}
+            {!lessonsData && "Loading..."}
           </p>
         </div>
         <div className="info">
           <h4>Course Info</h4>
           <div className="rows space-between align-center">
             <p style={{ fontSize: ".8rem", fontWeight: "bold" }}>Level</p>
-            <p style={{ color: "#afafaf" }}>Easy</p>
+            <p style={{ color: "#afafaf" }}>
+              {lessonsData
+                ? (lessonsData[0].Easy && "Easy") ||
+                  (lessonsData[0].Hard && "Hard") ||
+                  (lessonsData[0].Medium && "Medium")
+                : "Loading..."}
+            </p>
           </div>
           <hr />
           <div className="rows space-between align-center">
@@ -86,7 +137,10 @@ const Lessons = () => {
           <hr />
           <div className="rows space-between align-center">
             <p style={{ fontSize: ".8rem", fontWeight: "bold" }}>Duration</p>
-            <p style={{ color: "#afafaf" }}>60 mins</p>
+            <p style={{ color: "#afafaf" }}>
+              {lessonsData && lessonsData[0].Duration + " " + "mins"}
+              {!lessonsData && "Loading..."}
+            </p>
           </div>
         </div>
         <div className="share">
@@ -107,4 +161,34 @@ const Lessons = () => {
   );
 };
 
-export default Lessons;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(mapStateToProps)(Lessons);
+
+// [
+//   {
+//       "id": 3,
+//       "BigTitle": "BurpSuite",
+//       "SmallTitle": "burp2",
+//       "ChallangeDescription": "bla bla bla bla bla",
+//       "Hint": "open burp from terminal",
+//       "Easy": true,
+//       "Medium": false,
+//       "Hard": false,
+//       "Duration": "40",
+//       "examples": [
+//           {
+//               "id": 5,
+//               "title": "using burp",
+//               "IsSolved": true,
+//               "IsMarked": false,
+//               "markId": null
+//           }
+//       ],
+//       "paid": true
+//   }
+// ]

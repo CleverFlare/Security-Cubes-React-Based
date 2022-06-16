@@ -4,13 +4,14 @@ import Button from "../uikit/simple/Button";
 import FormControl from "../uikit/simple/FormControl";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Plan from "../uikit/complex/Plan";
 import TwitterSvg from "../icons/TwitterSvg";
 import FacebookSvg from "../icons/FacebookSvg";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ plans }) => {
+  const [transform, setTransform] = useState(null);
   useEffect(() => {
     AOS.init({ duration: 1000, delay: 200, once: true });
   }, []);
@@ -114,6 +115,8 @@ const Home = () => {
         data-aos="fade-right"
         className="sector columns justify-center gap-50"
         id="pricing"
+        style={transform}
+        onTransitionEnd={() => setTransform({ transform: "none" })}
       >
         <Typography varient="section-header" element="p">
           Pricing
@@ -123,24 +126,46 @@ const Home = () => {
           can access it through our hacker portal.
         </Typography>
         <div className="plans-layout">
-          <Plan
-            name="plan 1"
-            features={["feature 1", "feature 2", "feature 3"]}
-            price="00.00"
-            duration="month"
-          />
-          <Plan
-            name="plan 2"
-            features={["feature 1", "feature 2", "feature 3"]}
-            price="00.00"
-            duration="month"
-          />
-          <Plan
-            name="plan 3"
-            features={["feature 1", "feature 2", "feature 3"]}
-            price="00.00"
-            duration="month"
-          />
+          {plans &&
+            plans.map((plan) => (
+              <Plan
+                key={plan.id}
+                id={plan.id}
+                name={plan.PlanName}
+                features={plan.Features}
+                price={plan.Pricing}
+                duration="month"
+                paid={plan.paid}
+              />
+            ))}
+          {!plans && (
+            <>
+              <Plan
+                id=""
+                name="Plan A"
+                features={["feature", "feature", "feature"]}
+                price="00.00"
+                duration="month"
+                paid={true}
+              />
+              <Plan
+                id=""
+                name="Plan A"
+                features={["feature", "feature", "feature"]}
+                price="00.00"
+                duration="month"
+                paid={true}
+              />
+              <Plan
+                id=""
+                name="Plan A"
+                features={["feature", "feature", "feature"]}
+                price="00.00"
+                duration="month"
+                paid={true}
+              />
+            </>
+          )}
         </div>
       </div>
       <div

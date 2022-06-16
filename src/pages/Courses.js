@@ -1,133 +1,90 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import Card from "../uikit/simple/Card";
+import { useEffect, useState } from "react";
+import Card, { SkeletonCard } from "../uikit/simple/Card";
 import Pagination from "../uikit/simple/Pagination";
 import Typography from "../uikit/simple/Typography";
+import { useParams, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 
-const testingArray = [
-  {
-    title: "Web Security 1",
-    name: "Web Security 1",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 1",
-    name: "Web Security 1",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 1",
-    name: "Web Security 1",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 1",
-    name: "Web Security 1",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-
-  {
-    title: "Web Security 2",
-    name: "Web Security 2",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 2",
-    name: "Web Security 2",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 2",
-    name: "Web Security 2",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 2",
-    name: "Web Security 2",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-
-  {
-    title: "Web Security 3",
-    name: "Web Security 3",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 3",
-    name: "Web Security 3",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 3",
-    name: "Web Security 3",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-  {
-    title: "Web Security 3",
-    name: "Web Security 3",
-    src: "/lessons",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    lessons: 5,
-  },
-];
-
-const Courses = () => {
+const Courses = ({ token }) => {
   const [startPoint, setStartPoint] = useState(null);
   const [endPoint, setEndPoint] = useState(null);
+  const [lessons, setLessons] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetch("https://securitycubes.com/api/challanges/?trackid=" + id, {
+      headers: {
+        Authorization: "Token" + " " + token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setLessons(data);
+      });
+  }, []);
 
   return (
     <div className="sector columns gap-50" style={{ gap: "20px" }}>
       <Link to="/training" style={{ color: "white", textDecoration: "none" }}>
         &lt; All Paths
       </Link>
-      <Typography varient="section-content">Web Security Knowledge</Typography>
-      <Typography varient="caption">Web Security Knowledge</Typography>
+      <Typography varient="section-content" style={{ fontWeight: "bold" }}>
+        Web 1
+      </Typography>
+      <Typography varient="caption">Web 2</Typography>
       <Typography varient="button-labels">Courses</Typography>
-      <hr style={{ width: "100%" }} />
+      <hr
+        style={{
+          width: "100%",
+          border: "none",
+          backgroundColor: "#5a5a5a",
+          height: "2px",
+        }}
+      />
       <div className="cards-grid-1">
-        {testingArray.slice(startPoint, endPoint).map((card, index) => (
-          <Card
-            key={index}
-            title={card.title}
-            name={card.name}
-            picture={card.picture}
-            lessons={card.lessons}
-            src={card.src}
-          />
-        ))}
+        {lessons &&
+          lessons
+            .slice(startPoint, endPoint)
+            .map((lesson, index) => (
+              <Card
+                key={index}
+                title={lesson.ChallangeName}
+                name={lesson.Description}
+                picture={lesson.ChallangePhoto}
+                lessons={lesson.num}
+                src={"/training" + "/" + id + "/" + lesson.id}
+              />
+            ))}
+        {lessons.length <= 0 && (
+          <>
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
+          </>
+        )}
       </div>
       <div className="rows justify-center">
-        <Pagination
-          startPointSetter={setStartPoint}
-          endPointSetter={setEndPoint}
-          array={testingArray}
-          amount={4}
-        />
+        {!lessons.length <= 0 && (
+          <Pagination
+            startPointSetter={setStartPoint}
+            endPointSetter={setEndPoint}
+            array={lessons}
+            amount={4}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-export default Courses;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(mapStateToProps)(Courses);

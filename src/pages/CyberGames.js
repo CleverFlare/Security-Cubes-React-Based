@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "../uikit/simple/Card";
+import Card, { SkeletonCard } from "../uikit/simple/Card";
 import Pagination from "../uikit/simple/Pagination";
 import Typography from "../uikit/simple/Typography";
 
@@ -248,7 +248,7 @@ const testingArray = [
   },
 ];
 
-const CyberGames = () => {
+const CyberGames = ({ data }) => {
   const [startPoint, setStartPoint] = useState(null);
   const [endPoint, setEndPoint] = useState(null);
   return (
@@ -256,20 +256,43 @@ const CyberGames = () => {
       <div className="flex-center__wrapper-columns" style={{ gap: "20px" }}>
         <Typography varient="section-content">Games</Typography>
         <div className="cards-grid-2">
-          {testingArray.slice(startPoint, endPoint).map((item, index) => (
-            <Card
-              key={index}
-              title={item.title}
-              picture={item.picture}
-              style={{ width: "100%" }}
-            />
-          ))}
+          {data &&
+            data
+              .slice(startPoint, endPoint)
+              .map((item, index) => (
+                <Card
+                  key={index}
+                  title={item.GameName}
+                  picture={item.GamePhoto}
+                  style={{ width: "100%" }}
+                />
+              ))}
+          {!data && (
+            <>
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+              <SkeletonCard type="game" />
+            </>
+          )}
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Pagination
             startPointSetter={setStartPoint}
             endPointSetter={setEndPoint}
-            array={testingArray}
+            array={data ? data : [0]}
             amount={16}
           />
         </div>

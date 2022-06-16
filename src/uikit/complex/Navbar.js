@@ -13,8 +13,9 @@ import CloseSvg from "../../icons/CloseSvg";
 import SignoutSvg from "../../icons/SingoutSvg";
 import { HashLink } from "react-router-hash-link";
 import AOS from "aos";
+import { connect } from "react-redux";
 
-const SideNavbar = ({ style, onSignout, logged, closeMenu }) => {
+const SideNavbar = ({ style, name, onSignout, logged, closeMenu }) => {
   const homeNavLinks = (
     <menu className="navbar-top__side-bar__anchors-wrapper">
       <li>
@@ -75,7 +76,7 @@ const SideNavbar = ({ style, onSignout, logged, closeMenu }) => {
             onClick={() => closeMenu()}
           >
             <AccountSvg />
-            <p>Muhammad Maher</p>
+            <p>{name && name}</p>
             <p>Account Details</p>
           </Link>
         )}
@@ -97,7 +98,10 @@ const SideNavbar = ({ style, onSignout, logged, closeMenu }) => {
           <button
             to="/account"
             className="navbar-top__side-bar__account"
-            onClick={onSignout}
+            onClick={() => {
+              onSignout();
+              closeMenu();
+            }}
           >
             <SignoutSvg />
             Signout
@@ -108,7 +112,7 @@ const SideNavbar = ({ style, onSignout, logged, closeMenu }) => {
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ token, resetToken, name }) => {
   useEffect(() => {
     AOS.init({ duration: 1000, delay: 200, once: true });
   }, []);
@@ -143,9 +147,19 @@ const NavBar = () => {
           <HashLink to="/#blog">Blog</HashLink>
         </li>
       </menu>
-      <Link to="/account" className="navbar-top__account-icon-wrapper">
-        <AccountSvg />
-      </Link>
+      <div style={{ display: "flex", gap: "30px" }}>
+        <Link to="/account" className="navbar-top__icon-wrapper">
+          <AccountSvg />
+        </Link>
+        {token && (
+          <button
+            className="navbar-top__icon-wrapper"
+            onClick={() => resetToken()}
+          >
+            <SignoutSvg size="30px" />
+          </button>
+        )}
+      </div>
       <button
         className={
           "navbar-top__burger-button" +
@@ -158,6 +172,9 @@ const NavBar = () => {
         {showPhoneMenu && <CloseSvg />}
       </button>
       <SideNavbar
+        logged={token ? true : false}
+        name={name && name}
+        onSignout={() => resetToken()}
         style={{ left: showPhoneMenu ? "0" : "-100%" }}
         closeMenu={handleCloseMenu}
       />
@@ -165,4 +182,16 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetToken: () => dispatch({ type: "reset-token" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

@@ -12,6 +12,7 @@
   border: none;
   cursor: pointer;
   text-decoration: none;
+  box-sizing: border-box;
 }
 .primary:hover {
   background-color: #9999ff;
@@ -31,6 +32,7 @@
   font-size: 20px;
   border: none;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .secondary {
@@ -42,15 +44,16 @@
   height: 56px;
   border-radius: 3px;
   background-color: transparent;
-  border: #0000b5 solid 2px;
-  color: #0000b5;
+  border: #ffffff solid 2px;
+  color: #ffffff;
   font-size: 20px;
   cursor: pointer;
   text-decoration: none;
+  box-sizing: border-box;
 }
 .secondary:hover {
-  border: #9999ff solid 2px;
-  color: #9999ff;
+  border: #ffffff82 solid 2px;
+  color: #ffffff82;
 }
 
 .tertiary {
@@ -67,9 +70,28 @@
   font-size: 20px;
   cursor: pointer;
   text-decoration: none;
+  box-sizing: border-box;
 }
 .tertiary:hover {
   background-color: #fff;
   border: #fff solid 2px;
   color: #9e2a2b;
+}
+.tertiary-disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 178px;
+  width: max-content;
+  height: 40px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: #fff solid 2px;
+  color: #fff;
+  font-size: 20px;
+  cursor: default;
+  text-decoration: none;
+  pointer-events: none;
+  opacity: 0.3;
+  box-sizing: border-box;
 }

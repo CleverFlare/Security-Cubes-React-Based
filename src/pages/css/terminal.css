@@ -6,6 +6,7 @@
 #terminal > :first-child,
 #terminal > :last-child {
   flex: 1;
+  max-height: 900px;
 }
 
 .guide {
@@ -27,7 +28,6 @@
   flex-direction: column;
   gap: 10px;
   flex: 1;
-  max-height: 800px;
   padding: 20px;
   color: initial;
   background-color: white;
@@ -45,11 +45,7 @@
 
 .bash-header {
   display: flex;
-  gap: 3px;
-}
-
-.bash-tabs {
-  display: flex;
+  flex-wrap: wrap;
   gap: 3px;
 }
 
@@ -58,7 +54,6 @@
   flex-direction: column;
   gap: 10px;
   flex: 1;
-  max-height: 800px;
   padding: 20px;
   background-color: #3d3d3d;
   overflow-y: auto;
@@ -175,7 +170,7 @@
 
   .bash,
   .guide {
-    height: 100vh;
+    height: 50vh;
     max-height: 100vh;
   }
 

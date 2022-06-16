@@ -3,11 +3,19 @@ import { useState } from "react";
 import ShownSvg from "../../icons/ShownSvg";
 import HiddenSvg from "../../icons/HiddenSvg";
 
-const FormControl = ({ type, label, onChange, value }) => {
+const FormControl = ({
+  type,
+  label,
+  onChange,
+  value,
+  style,
+  disabled,
+  readonly,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={FormControlStyles["wrapper"]}>
+    <div className={FormControlStyles["wrapper"]} style={style}>
       {label && <label htmlFor="">{label}</label>}
       {type !== "textarea" && (
         <div className={FormControlStyles["form-control-wrapper"]}>
@@ -21,10 +29,16 @@ const FormControl = ({ type, label, onChange, value }) => {
                   : type
                 : "text"
             }
-            className={FormControlStyles["form-control"]}
+            className={
+              FormControlStyles["form-control"] +
+              " " +
+              (disabled && FormControlStyles["disabled"]) +
+              " " +
+              (readonly && FormControlStyles["readonly"])
+            }
             onChange={onChange}
             value={value}
-            minLength={type === "password" ? "8" : "524288"}
+            readOnly={readonly}
           />
           {type === "password" && (
             <button
@@ -41,11 +55,19 @@ const FormControl = ({ type, label, onChange, value }) => {
       )}
       {type === "textarea" && (
         <textarea
-          className={FormControlStyles["form-control"]}
+          className={
+            FormControlStyles["form-control"] +
+            " " +
+            (disabled &&
+              FormControlStyles["disabled"] +
+                " " +
+                (readonly && FormControlStyles["readonly"]))
+          }
           cols="30"
           rows="10"
           onChange={onChange}
           value={value}
+          readOnly={readonly}
         ></textarea>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useReducer, useEffect } from "react";
 import Button from "../uikit/simple/Button";
 import CheckBox from "../uikit/simple/CheckBox";
@@ -8,12 +8,13 @@ import "./css/registration.css";
 import BackArrowSvg from "../icons/BackArrowSvg";
 import Toggle from "../uikit/simple/Toggle";
 import AOS from "aos";
+import { connect } from "react-redux";
 
 const init = {
   signInEmail: "",
   signInPassword: "",
   singInRemember: false,
-  singUpEmail: "",
+  signUpEmail: "",
   signUpPassword: "",
   signUpRemember: false,
 };
@@ -33,7 +34,7 @@ const reducer = (state, action) => {
     case ACTIONS.UPDATE_IN_EMAIL:
       return { ...state, signInEmail: action.payload };
     case ACTIONS.UPDATE_UP_EMAIL:
-      return { ...state, singUpEmail: action.payload };
+      return { ...state, signUpEmail: action.payload };
     case ACTIONS.UPDATE_IN_PASSWORD:
       return { ...state, signInPassword: action.payload };
     case ACTIONS.UPDATE_UP_PASSWORD:
@@ -47,9 +48,11 @@ const reducer = (state, action) => {
   }
 };
 
-const Registration = () => {
+const Registration = ({ setToken }) => {
   const [state, dispatch] = useReducer(reducer, init);
   const [registerState, setRegisterState] = useState("sign-in");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -57,14 +60,60 @@ const Registration = () => {
 
   const handleSignInSubmit = (event) => {
     event.preventDefault();
+    const singInData = {
+      username: state.signInEmail,
+      password: state.signInPassword,
+    };
+    fetch("https://securitycubes.com/api/login/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(singInData),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+          navigate(-1);
+        } else if (data.error) {
+          setError(data.error);
+        }
+      });
   };
 
   const handleSignUpSubmit = (event) => {
     event.preventDefault();
+    const singUpData = {
+      email: state.signUpEmail,
+      first_name: "",
+      last_name: "",
+      password: state.signUpPassword,
+      username: state.signUpEmail.split("@")[0],
+    };
+    fetch("https://securitycubes.com/api/signup/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(singUpData),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+          navigate(-1);
+        } else if (data.error) {
+          setError(data.error);
+        }
+      });
   };
 
   const handleToggleRegisterState = (event) => {
     dispatch({ type: ACTIONS.RESET });
+    setError("");
     switch (event.target.checked) {
       case true:
         setRegisterState("sign-up");
@@ -133,16 +182,24 @@ const Registration = () => {
                 value={state.signInPassword}
               />
               <div className="flex-rows-between">
-                <CheckBox
-                  label="Remember Me"
-                  onChange={(event) =>
-                    dispatch({
-                      type: ACTIONS.UPDATE_IN_REMEMBER,
-                      payload: event.target.checked,
-                    })
-                  }
-                  value={state.signInRemember}
-                />
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <CheckBox
+                    label="Remember Me"
+                    onChange={(event) =>
+                      dispatch({
+                        type: ACTIONS.UPDATE_IN_REMEMBER,
+                        payload: event.target.checked,
+                      })
+                    }
+                    value={state.signInRemember}
+                  />
+                  <Typography
+                    varient="caption"
+                    style={{ color: "red", cursor: "default" }}
+                  >
+                    {error}
+                  </Typography>
+                </div>
                 <Link to="" style={{ color: "white", textDecoration: "none" }}>
                   Forgot your password?
                 </Link>
@@ -190,16 +247,24 @@ const Registration = () => {
                 value={state.signUpPassword}
               />
               <div>
-                <CheckBox
-                  label="Remember Me"
-                  onChange={(event) =>
-                    dispatch({
-                      type: ACTIONS.UPDATE_UP_REMEMBER,
-                      payload: event.target.checked,
-                    })
-                  }
-                  value={state.signUpRemember}
-                />
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <CheckBox
+                    label="Remember Me"
+                    onChange={(event) =>
+                      dispatch({
+                        type: ACTIONS.UPDATE_UP_REMEMBER,
+                        payload: event.target.checked,
+                      })
+                    }
+                    value={state.signUpRemember}
+                  />
+                  <Typography
+                    varient="caption"
+                    style={{ color: "red", cursor: "default" }}
+                  >
+                    {error}
+                  </Typography>
+                </div>
               </div>
               <div className="submit-button-wrapper">
                 <Button varient="primary">Sign Up</Button>
@@ -212,4 +277,16 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setToken: (value) => dispatch({ type: "set-token", payload: value }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

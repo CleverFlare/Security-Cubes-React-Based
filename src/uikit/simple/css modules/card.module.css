@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 253px;
+  min-width: 253px;
+  max-width: 280px;
   text-decoration: none;
   transition: 0.2s;
+  flex: 1;
 }
 
 .card:hover {
@@ -72,4 +74,48 @@
 
 .card > p {
   font-size: 14px;
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 253px;
+  max-width: 280px;
+  text-decoration: none;
+  transition: 0.2s;
+  flex: 1;
+}
+
+.skeleton-card-img-wrapper {
+  width: 100%;
+  height: 144px;
+  overflow: hidden;
+  border-radius: 5px;
+  animation: skeleton 1s alternate infinite;
+}
+
+.skeleton-card-name {
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 5px;
+  animation: skeleton 1s alternate infinite;
+}
+
+.skeleton-card-lessons {
+  width: 30%;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 5px;
+  animation: skeleton 1s alternate infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-color: #818181;
+  }
+  100% {
+    background-color: #6a6a6a;
+  }
 }

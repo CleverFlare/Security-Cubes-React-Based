@@ -2,19 +2,20 @@ import Button from "../uikit/simple/Button";
 import "./css/hall.css";
 import AOS from "aos";
 import { useEffect } from "react";
+import { connect } from "react-redux";
 
-const Hall = () => {
+const Hall = ({ token }) => {
   useEffect(() => {
     AOS.init({ duration: 1000, delay: 200, once: true });
   }, []);
   return (
     <div className="sector columns justify-center gap-50" id="hall">
-      <div className="rows justify-center gap-10">
+      <div className="rows justify-center gap-50">
         <div data-aos="flip-left" className="hall__card" id="cyber-games-card">
           <div className="hall__card__picture-wrapper">
             <img src="./illustrations/Games.png" />
           </div>
-          <Button varient="primary" to="/games">
+          <Button varient="primary" to={token ? "/games" : "/account"}>
             Cyber Games
           </Button>
         </div>
@@ -26,7 +27,7 @@ const Hall = () => {
           <div className="hall__card__picture-wrapper">
             <img src="./illustrations/Training.png" />
           </div>
-          <Button varient="primary" to="/training">
+          <Button varient="primary" to={token ? "/training" : "/account"}>
             Cyber Training
           </Button>
         </div>
@@ -35,4 +36,10 @@ const Hall = () => {
   );
 };
 
-export default Hall;
+function mapStateToProps(state) {
+  return {
+    token: state.token,
+  };
+}
+
+export default connect(mapStateToProps)(Hall);

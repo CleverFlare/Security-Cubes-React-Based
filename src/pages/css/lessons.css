@@ -211,4 +211,16 @@
     flex-direction: column;
     padding-inline: 5px;
   }
+  .course-header {
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .course-header * {
+    text-align: center;
+  }
+  #wrapper {
+    justify-content: center;
+    align-items: center;
+  }
 }

@@ -1,0 +1,44 @@
+#account-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-inline: 300px;
+}
+
+.account-details-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.account-details-form > :last-child {
+  grid-column: 1 / -1;
+}
+
+.payment-details-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.payment-details-form > :last-child {
+  grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 1028px) {
+  #account-details {
+    padding-inline: 5px;
+    text-align: center;
+  }
+  .account-details-form,
+  .payment-details-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .account-details-form > *,
+  .payment-details-form > * {
+    width: 100%;
+  }
+}

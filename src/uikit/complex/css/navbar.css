@@ -31,21 +31,25 @@
 .navbar-top .navbar-top__nav-anchors * {
   color: white;
   text-decoration: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 .navbar-top .navbar-top__nav-anchors *:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
-.navbar-top .navbar-top__account-icon-wrapper {
+.navbar-top .navbar-top__icon-wrapper {
+  appearance: none;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
-.navbar-top .navbar-top__account-icon-wrapper svg {
-  width: 32px;
-  height: 32px;
+.navbar-top .navbar-top__icon-wrapper svg {
+  width: 26px;
+  height: 26px;
 }
 
 .navbar-top .navbar-top__side-bar {
@@ -64,7 +68,7 @@
   left: 0;
   transform-origin: top;
   box-sizing: border-box;
-  transition: .5s;
+  transition: 0.5s;
   z-index: 2000;
   box-shadow: 10px 0 20px #0000004f;
 }
@@ -78,7 +82,7 @@
   width: 32px;
   height: 32px;
 }
-.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user  {
+.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user {
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr;
@@ -86,10 +90,16 @@
   column-gap: 10px;
   padding: 10px 0;
 }
-.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user > :first-child  {
+.navbar-top
+  .navbar-top__side-bar
+  .navbar-top__side-bar__logged-user
+  > :first-child {
   grid-row: 1 / -1;
 }
-.navbar-top .navbar-top__side-bar .navbar-top__side-bar__logged-user > :last-child  {
+.navbar-top
+  .navbar-top__side-bar
+  .navbar-top__side-bar__logged-user
+  > :last-child {
   grid-column: 2 / -1;
   color: gray;
   font-size: 12px;
@@ -157,7 +167,7 @@
   width: 500vw;
   height: 500vw;
   transform: translate(-50%, -50%);
-  transition: .5s;
+  transition: 0.5s;
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
@@ -167,7 +177,7 @@
   opacity: 1;
   pointer-events: all;
   transform: translate(-50%, -50%);
-  transition: .5s;
+  transition: 0.5s;
 }
 .navbar-top .navbar-top__burger-button svg {
   width: 32px;
@@ -186,7 +196,7 @@
   .navbar-top .navbar-top__nav-anchors {
     display: none;
   }
-  .navbar-top .navbar-top__account-icon-wrapper {
+  .navbar-top .navbar-top__icon-wrapper {
     display: none;
   }
 }

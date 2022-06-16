@@ -1,96 +1,9 @@
 import { useState } from "react";
-import Card from "../uikit/simple/Card";
+import Card, { SkeletonCard } from "../uikit/simple/Card";
 import Pagination from "../uikit/simple/Pagination";
 import Typography from "../uikit/simple/Typography";
 
-const testingArray = [
-  {
-    name: "Web Security 1",
-    title: "Web Security 1",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 1",
-    title: "Web Security 1",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 1",
-    title: "Web Security 1",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 1",
-    title: "Web Security 1",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 2",
-    title: "Web Security 2",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 2",
-    title: "Web Security 2",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 2",
-    title: "Web Security 2",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 2",
-    title: "Web Security 2",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 3",
-    title: "Web Security 3",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 3",
-    title: "Web Security 3",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 3",
-    title: "Web Security 3",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-  {
-    name: "Web Security 3",
-    title: "Web Security 3",
-    picture: "https://cdn.securitycubes.com/media/TrackPhoto/garden.jpg",
-    src: "/courses",
-    lessons: 5,
-  },
-];
-
-const CyberTraining = () => {
+const CyberTraining = ({ tracks }) => {
   const [recommendedStartPoint, setRecommendedStartPoint] = useState(null);
   const [recommendedEndPoint, setRecommendedEndPoint] = useState(null);
 
@@ -101,35 +14,48 @@ const CyberTraining = () => {
     <div className="cyber-training">
       <div className="sector columns gap-50">
         <div className="columns gap-10" style={{ gap: "20px" }}>
-          <Typography varient="section-content">Recommended paths</Typography>
+          <Typography varient="section-content" style={{ fontWeight: "bold" }}>
+            Recommended paths
+          </Typography>
           <div className="cards-grid-1">
-            {testingArray
-              .slice(recommendedStartPoint, recommendedEndPoint)
-              .map((card, index) => (
-                <Card
-                  key={index}
-                  picture={card.picture}
-                  title={card.title}
-                  name={card.name}
-                  lessons={card.lessons}
-                  src={card.src}
-                />
-              ))}
+            {tracks &&
+              tracks
+                .slice(recommendedStartPoint, recommendedEndPoint)
+                .map((track, index) => (
+                  <Card
+                    key={index}
+                    picture={track.TrackPhoto}
+                    title={track.TrackName}
+                    name={track.Description}
+                    lessons={track.num}
+                    src={`/training/${track.id}`}
+                  />
+                ))}
+            {!tracks && (
+              <>
+                <SkeletonCard type="track" />
+                <SkeletonCard type="track" />
+                <SkeletonCard type="track" />
+                <SkeletonCard type="track" />
+              </>
+            )}
           </div>
         </div>
         <div className="rows justify-center">
           <Pagination
             startPointSetter={setRecommendedStartPoint}
             endPointSetter={setRecommendedEndPoint}
-            array={testingArray}
+            array={tracks ? tracks : [0]}
             amount={4}
           />
         </div>
 
         <div className="columns gap-10" style={{ gap: "20px" }}>
-          <Typography varient="section-content">Popular Courses</Typography>
+          <Typography varient="section-content" style={{ fontWeight: "bold" }}>
+            Popular Courses
+          </Typography>
           <div className="cards-grid-1">
-            {testingArray
+            {/* {testingArray
               .slice(popularStartPoint, popularEndPoint)
               .map((card, index) => (
                 <Card
@@ -140,14 +66,19 @@ const CyberTraining = () => {
                   lessons={card.lessons}
                   src={card.src}
                 />
-              ))}
+              ))} */}
+
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
+            <SkeletonCard type="track" />
           </div>
         </div>
         <div className="rows justify-center">
           <Pagination
             startPointSetter={setPopularStartPoint}
             endPointSetter={setPopularEndPoint}
-            array={testingArray}
+            array={[0]}
             amount={4}
           />
         </div>

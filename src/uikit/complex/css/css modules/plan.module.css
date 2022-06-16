@@ -1,13 +1,14 @@
-.planWrapper {
+.plan-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   padding: 40px;
   max-width: 300px;
   min-width: 200px;
   background-color: #3d3d3d;
   border-radius: 5px;
+  position: relative;
 }
 
 .wrapper {
@@ -18,7 +19,7 @@
   text-align: center;
 }
 
-.featuresMenu {
+.features-menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,6 +31,61 @@
   list-style-type: none;
 }
 
-.planWrapper hr {
-  width: 100%;
+.plan-wrapper hr {
+  width: 80%;
+  border: none;
+  height: 2px;
+  background-color: #5a5a5a;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 1000000;
+  width: 30vw;
+  height: 50vh;
+  max-height: 50vh;
+  box-sizing: border-box;
+  background-color: #3d3d3d;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.active {
+  visibility: visible;
+  pointer-events: all;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #0000003b;
+  backdrop-filter: blur(5px);
+  z-index: 0;
+  transition: 0.2s;
+  z-index: 100000;
+}
+
+.popup > button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000000;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
 }

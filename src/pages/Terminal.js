@@ -2,6 +2,8 @@ import reactStringReplace from "react-string-replace";
 import React, { useEffect, useState } from "react";
 import "./css/terminal.css";
 import "./css/description.css";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const test = `
 <h1>Introduction to pacman package manager</h1>
@@ -32,21 +34,38 @@ const Tab = ({ name, onClose, onClick, active }) => {
   );
 };
 
-const TerminalTab = ({ show }) => {
+const TerminalTab = ({ show, id, token }) => {
   const [command, setCommand] = useState("");
   const [output, setOutput] = useState([]);
 
   const handleNewInputSubmitted = (event) => {
     event.preventDefault();
+    const dataBody = {
+      SolutionInput: command,
+      exampleid: `${id}`,
+    };
     if (!command) return;
-    setOutput((oldOutput) => [
-      ...oldOutput,
-      {
-        command: command,
-        response: "output",
+    fetch("https://securitycubes.com/api/Solution/", {
+      method: "POST",
+      headers: {
+        Authorization: "Token " + token,
+        "Content-Type": "application/json",
       },
-    ]);
-    setCommand("");
+      body: JSON.stringify(dataBody),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setOutput((oldOutput) => [
+          ...oldOutput,
+          {
+            command: command,
+            response: data.solution,
+          },
+        ]);
+        setCommand("");
+      });
   };
   return (
     <div className="terminal-tab" style={{ display: show ? "flex" : "none" }}>
@@ -72,10 +91,13 @@ const TerminalTab = ({ show }) => {
   );
 };
 
-const Terminal = () => {
+const Terminal = ({ token }) => {
   const [description, setDescription] = useState("");
   const [currentTab, setCurrentTab] = useState(0);
   const [tabs, setTabs] = useState([0]);
+  const [data, setData] = useState(null);
+  const [lessonID, setLessonID] = useState(null);
+  const { id } = useParams();
 
   const handlePreventPropigationAndDefault = (event) => {
     event.preventDefault();
@@ -113,6 +135,18 @@ const Terminal = () => {
   };
 
   useEffect(() => {
+    fetch("https://securitycubes.com/api/Solution/?exampleid=" + id, {
+      headers: {
+        Authorization: "Token " + token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLessonID(data.id);
+      });
     setDescription(
       reactStringReplace(test, /<h1>(.*?)<\/h1>/gi, (match, i) => (
         <h1 key={match + i}>{match}</h1>
@@ -201,22 +235,21 @@ const Terminal = () => {
           <span>Learn</span>
         </div>
         <div className="guide-body" dir="ltr">
-          {description}
+          {data && data.SolutionDescription}
+          {!data && "Loading..."}
         </div>
       </div>
       <div className="bash">
         <div className="bash-header">
-          <div className="bash-tabs">
-            {tabs.map((tab, index) => (
-              <Tab
-                key={index}
-                name={"bash" + " " + (index + 1)}
-                active={currentTab === tab}
-                onClick={(event) => handleSelectTab(event, tab)}
-                onClose={(event) => handleDeleteTab(event, tab)}
-              />
-            ))}
-          </div>
+          {tabs.map((tab, index) => (
+            <Tab
+              key={index}
+              name={"bash" + " " + (index + 1)}
+              active={currentTab === tab}
+              onClick={(event) => handleSelectTab(event, tab)}
+              onClose={(event) => handleDeleteTab(event, tab)}
+            />
+          ))}
           {tabs.length < 4 && (
             <button className="add-tab" onClick={handleAddTab}>
               +
@@ -225,7 +258,12 @@ const Terminal = () => {
         </div>
         <div className="bash-body">
           {tabs.map((tab, index) => (
-            <TerminalTab key={tab} show={currentTab === tab} />
+            <TerminalTab
+              id={id}
+              key={tab}
+              token={token}
+              show={currentTab === tab}
+            />
           ))}
         </div>
       </div>
@@ -233,4 +271,10 @@ const Terminal = () => {
   );
 };
 
-export default Terminal;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(mapStateToProps)(Terminal);
