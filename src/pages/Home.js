@@ -13,12 +13,32 @@ import { Link } from "react-router-dom";
 
 const Home = ({ plans, token }) => {
   const [transform, setTransform] = useState(null);
+  const [contactUsername, setContactUsername] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+
   useEffect(() => {
     AOS.init({ duration: 1000, delay: 200, once: true });
   }, []);
+
   const handleContactSubmit = (event) => {
     event.preventDefault();
+    const data = {
+      email: contactEmail,
+      FullName: contactUsername,
+      message: contactMessage,
+    };
+    fetch("https://securitycubes.com/api/contactUs/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      setContactEmail("");
+      setContactMessage("");
+      setContactUsername("");
+    });
   };
+
   return (
     <div className="home-page">
       <div
@@ -106,9 +126,24 @@ const Home = ({ plans, token }) => {
           Get in touch with us today!
         </Typography>
         <form className="contact-layout" onSubmit={handleContactSubmit}>
-          <FormControl type="text" label="Name" />
-          <FormControl type="email" label="Email" />
-          <FormControl type="textarea" label="Your Message" />
+          <FormControl
+            type="text"
+            value={contactUsername}
+            onChange={(event) => setContactUsername(event.target.value)}
+            label="Name"
+          />
+          <FormControl
+            type="email"
+            value={contactEmail}
+            onChange={(event) => setContactEmail(event.target.value)}
+            label="Email"
+          />
+          <FormControl
+            type="textarea"
+            value={contactMessage}
+            onChange={(event) => setContactMessage(event.target.value)}
+            label="Your Message"
+          />
           <Button varient="primary">Send</Button>
         </form>
       </div>
