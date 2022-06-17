@@ -251,22 +251,31 @@ const testingArray = [
 const CyberGames = ({ data }) => {
   const [startPoint, setStartPoint] = useState(null);
   const [endPoint, setEndPoint] = useState(null);
+  console.log(data);
   return (
     <div className="flex" id="cyber-games">
       <div className="flex-center__wrapper-columns" style={{ gap: "20px" }}>
         <Typography varient="section-content">Games</Typography>
         <div className="cards-grid-2">
           {data &&
-            data
-              .slice(startPoint, endPoint)
-              .map((item, index) => (
-                <Card
-                  key={index}
-                  title={item.GameName}
-                  picture={item.GamePhoto}
-                  style={{ width: "100%" }}
-                />
-              ))}
+            data.slice(startPoint, endPoint).map((item, index) => (
+              <Card
+                key={index}
+                title={item.GameName}
+                picture={item.GamePhoto}
+                style={{ width: "100%" }}
+                href="/game page/game.html"
+                onClick={() => {
+                  localStorage.setItem("GameLoderUrl", item.GameLoderUrl);
+                  localStorage.setItem("GameDataUrl", item.GameDataUrl);
+                  localStorage.setItem(
+                    "GameFrameworkUrl",
+                    item.GameFrameworkUrl
+                  );
+                  localStorage.setItem("GameCodeUrl", item.GameCodeUrl);
+                }}
+              />
+            ))}
           {!data && (
             <>
               <SkeletonCard type="game" />

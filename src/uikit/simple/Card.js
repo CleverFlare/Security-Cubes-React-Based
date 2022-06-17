@@ -15,7 +15,7 @@ export const SkeletonCard = ({ type }) => {
   );
 };
 
-const Card = ({ picture, src, title, href, name, lessons, style }) => {
+const Card = ({ picture, src, title, href, name, lessons, style, onClick }) => {
   return (
     <>
       {!href && (
@@ -23,6 +23,7 @@ const Card = ({ picture, src, title, href, name, lessons, style }) => {
           to={src ? src : ""}
           className={CardStyles["card"]}
           style={style && style}
+          onClick={onClick}
         >
           <div className={CardStyles["card-wrapper"]}>
             <h2>{title}</h2>
@@ -34,7 +35,12 @@ const Card = ({ picture, src, title, href, name, lessons, style }) => {
         </Link>
       )}
       {href && (
-        <a href={href} className={CardStyles["card"]} style={style && style}>
+        <a
+          href={href}
+          className={CardStyles["card"]}
+          style={style && style}
+          onClick={onClick}
+        >
           <div className={CardStyles["card-wrapper"]}>
             <h2>{title}</h2>
             {lessons && <p>lessons {lessons}</p>}

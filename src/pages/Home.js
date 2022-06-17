@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import Plan from "../uikit/complex/Plan";
 import TwitterSvg from "../icons/TwitterSvg";
 import FacebookSvg from "../icons/FacebookSvg";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Home = ({ plans }) => {
+const Home = ({ plans, token }) => {
   const [transform, setTransform] = useState(null);
   useEffect(() => {
     AOS.init({ duration: 1000, delay: 200, once: true });
@@ -91,7 +92,7 @@ const Home = ({ plans }) => {
           creatively and critically to solve the challenges and capture the
           flags.
         </Typography>
-        <Button>Compete Now</Button>
+        <Button to={token ? "/training" : "/account"}>Compete Now</Button>
       </div>
       <div
         data-aos="fade-right"
@@ -194,4 +195,10 @@ const Home = ({ plans }) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
