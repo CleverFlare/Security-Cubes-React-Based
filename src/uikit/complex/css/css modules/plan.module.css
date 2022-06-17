@@ -41,19 +41,22 @@
 .popup {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 10px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   z-index: 1000000;
   width: 30vw;
-  height: 50vh;
+  height: max-content;
   max-height: 50vh;
+  padding: 30px;
   box-sizing: border-box;
   background-color: #3d3d3d;
   border-radius: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
   visibility: hidden;
   pointer-events: none;
   transition: 0.2s;
