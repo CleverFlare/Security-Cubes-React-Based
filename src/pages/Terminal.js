@@ -200,7 +200,7 @@ const Terminal = ({ token }) => {
       ))
     );
     setDescription((last) =>
-      reactStringReplace(last, /<code li>(.*?)<\/code li>/gi, (match, i) => (
+      reactStringReplace(last, /<codeli>(.*?)<\/codeli>/gi, (match, i) => (
         <p key={match + i} className="code-list-item">
           {match}
         </p>
