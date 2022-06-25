@@ -134,21 +134,9 @@ const Terminal = ({ token }) => {
     setCurrentTab(id);
   };
 
-  useEffect(() => {
-    fetch("https://securitycubes.com/api/Solution/?exampleid=" + id, {
-      headers: {
-        Authorization: "Token " + token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLessonID(data.id);
-      });
+  const parse = (data) => {
     setDescription(
-      reactStringReplace(test, /<h1>(.*?)<\/h1>/gi, (match, i) => (
+      reactStringReplace(data, /<h1>(.*?)<\/h1>/gi, (match, i) => (
         <h1 key={match + i}>{match}</h1>
       ))
     );
@@ -226,6 +214,100 @@ const Terminal = ({ token }) => {
         ></iframe>
       ))
     );
+  };
+
+  useEffect(() => {
+    fetch("https://securitycubes.com/api/Solution/?exampleid=" + id, {
+      headers: {
+        Authorization: "Token " + token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        parse(data.SolutionDescription);
+        setLessonID(data.id);
+      });
+    // setDescription(
+    //   reactStringReplace(test, /<h1>(.*?)<\/h1>/gi, (match, i) => (
+    //     <h1 key={match + i}>{match}</h1>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<h2>(.*?)<\/h2>/gi, (match, i) => (
+    //     <h2 key={match + i}>{match}</h2>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<h3>(.*?)<\/h3>/gi, (match, i) => (
+    //     <h3 key={match + i}>{match}</h3>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<h4>(.*?)<\/h4>/gi, (match, i) => (
+    //     <h4 key={match + i}>{match}</h4>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<h5>(.*?)<\/h5>/gi, (match, i) => (
+    //     <h5 key={match + i}>{match}</h5>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<h6>(.*?)<\/h6>/gi, (match, i) => (
+    //     <h6 key={match + i}>{match}</h6>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<code>(.*?)<\/code>/gi, (match, i) => (
+    //     <p key={match + i} className="code">
+    //       {match}
+    //     </p>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<p>(.*?)<\/p>/gi, (match, i) => (
+    //     <p key={match + i}>{match}</p>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<b>(.*?)<\/b>/gi, (match, i) => (
+    //     <b key={match + i}>{match}</b>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /(<hr \/>)/gi, (match, i) => (
+    //     <hr key={match + i} />
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<codeli>(.*?)<\/codeli>/gi, (match, i) => (
+    //     <p key={match + i} className="code-list-item">
+    //       {match}
+    //     </p>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<li>(.*?)<\/li>/gi, (match, i) => (
+    //     <p key={match + i} className="list-item">
+    //       {match}
+    //     </p>
+    //   ))
+    // );
+    // setDescription((last) =>
+    //   reactStringReplace(last, /<youtube>(.*?)<\/youtube>/gi, (match, i) => (
+    //     <iframe
+    //       key={match + i}
+    //       style={{ width: "100%", aspectRatio: "2 / 1.2" }}
+    //       src={match}
+    //       title="YouTube video player"
+    //       frameBorder="0"
+    //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //       allowFullScreen
+    //     ></iframe>
+    //   ))
+    // );
   }, []);
 
   return (
@@ -235,8 +317,8 @@ const Terminal = ({ token }) => {
           <span>Learn</span>
         </div>
         <div className="guide-body" dir="ltr">
-          {data && data.SolutionDescription}
-          {!data && "Loading..."}
+          {description && description}
+          {!description && "Loading..."}
         </div>
       </div>
       <div className="bash">
